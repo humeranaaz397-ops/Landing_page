@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EduAI Landing Page</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', Arial, sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: linear-gradient(180deg, #eef2ff 0%, #dfe7ff 45%, #eef5ff 100%);
+    color: #1f2d52;
+}
+
+.container {
+    max-width: 1180px;
+    margin: 0 auto;
+}
+
+header {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.95), rgba(118, 75, 162, 0.95));
+    color: white;
+    padding: 20px 5%;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.14);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+}
+
+nav h2 {
+    font-size: 1.5rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    font-weight: 600;
+    position: relative;
+}
+
+nav a.active,
+nav a:hover {
+    color: #ffffff;
+}
+
+nav a.active::after,
+nav a:hover::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    width: 100%;
+    height: 3px;
+    border-radius: 999px;
+    background: #ffd369;
+}
+
+.hero {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: center;
+    gap: 40px;
+    padding: 90px 5% 60px;
+}
+
+.hero-text {
+    max-width: 580px;
+}
+
+.hero h1 {
+    font-size: clamp(3rem, 5vw, 4.2rem);
+    line-height: 1.05;
+    margin-bottom: 24px;
+    letter-spacing: -0.05em;
+}
+
+.hero p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    margin-bottom: 30px;
+    color: rgba(255, 255, 255, 0.92);
+}
+
+.btn {
+    background: #ffffff;
+    color: #5f46c7;
+    padding: 16px 34px;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    font-weight: 700;
+    box-shadow: 0 16px 38px rgba(0, 0, 0, 0.16);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 22px 48px rgba(0, 0, 0, 0.22);
+}
+
+.hero-visual {
+    position: relative;
+    min-height: 420px;
+    background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.4), transparent 35%),
+                linear-gradient(180deg, rgba(255,255,255,.16) 0%, rgba(255,255,255,0) 100%);
+    border-radius: 32px;
+    overflow: hidden;
+    box-shadow: 0 22px 60px rgba(31, 45, 82, 0.18);
+}
+
+.hero-visual::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.35), transparent 28%),
+                      radial-gradient(circle at 80% 15%, rgba(255, 220, 122, 0.28), transparent 20%);
+}
+
+.hero-visual svg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.section-title {
+    text-align: center;
+    margin: 0 auto 38px;
+    max-width: 760px;
+}
+
+.section-title h2 {
+    font-size: 2.5rem;
+    color: #1f2d52;
+    margin-bottom: 16px;
+}
+
+.section-title p {
+    color: #5f6c8b;
+    line-height: 1.8;
+}
+
+.features,
+.courses,
+.practice {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+    padding: 0 5% 60px;
+}
+
+.card {
+    position: relative;
+    background: rgba(255,255,255,0.96);
+    border-radius: 24px;
+    padding: 28px;
+    box-shadow: 0 26px 58px rgba(21, 44, 99, 0.08);
+    border: 1px solid rgba(95, 70, 199, 0.12);
+    text-align: left;
+    transform-style: preserve-3d;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px) rotateX(2deg) rotateY(-2deg);
+    box-shadow: 0 32px 70px rgba(21, 44, 99, 0.15);
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 24px;
+    z-index: -1;
+    background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0));
+}
+
+.card img {
+    width: 100%;
+    border-radius: 18px;
+    margin-bottom: 18px;
+    object-fit: cover;
+    min-height: 170px;
+}
+
+.card h3 {
+    margin-bottom: 14px;
+    font-size: 1.3rem;
+}
+
+.card p {
+    color: #5f6c8b;
+    line-height: 1.75;
+}
+
+.testimonials {
+    padding: 0 5% 80px;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 32px;
+    padding: 0 5% 80px;
+}
+
+.testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+}
+
+.quote-card {
+    background: #ffffff;
+    padding: 28px;
+    border-radius: 24px;
+    box-shadow: 0 18px 40px rgba(31, 45, 82, 0.08);
+    border: 1px solid rgba(95, 70, 199, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+.quote-card::after {
+    content: '“';
+    position: absolute;
+    top: 16px;
+    right: 18px;
+    font-size: 5rem;
+    color: rgba(95, 70, 199, 0.08);
+}
+
+.quote-card p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #3a4964;
+}
+
+.quote-card span {
+    display: block;
+    margin-top: 18px;
+    font-weight: 700;
+    color: #1f2d52;
+}
+
+.contact-card,
+.form-card {
+    background: rgba(255,255,255,0.98);
+    border-radius: 26px;
+    padding: 36px;
+    box-shadow: 0 28px 70px rgba(21, 44, 99, 0.12);
+    border: 1px solid rgba(95, 70, 199, 0.1);
+}
+
+.contact-card h3,
+.form-card h3 {
+    margin-bottom: 20px;
+    font-size: 1.35rem;
+}
+
+.contact-list {
+    list-style: none;
+    display: grid;
+    gap: 18px;
+}
+
+.contact-list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #4c5a7f;
+    font-weight: 600;
+}
+
+.contact-list li span {
+    display: inline-flex;
+    width: 36px;
+    height: 36px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #eef2ff;
+    color: #5f46c7;
+}
+
+.form-card form {
+    display: grid;
+    gap: 18px;
+}
+
+.form-card label {
+    text-align: left;
+    display: block;
+    font-weight: 600;
+    color: #333e68;
+}
+
+.form-card input,
+.form-card textarea {
+    width: 100%;
+    padding: 16px 18px;
+    border-radius: 16px;
+    border: 1px solid rgba(95, 70, 199, 0.18);
+    background: #f8f9ff;
+    color: #1f2d52;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.form-card input:focus,
+.form-card textarea:focus {
+    border-color: #5f46c7;
+    transform: translateY(-1px);
+}
+
+.form-card textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+.form-card button {
+    width: fit-content;
+    background: linear-gradient(135deg, #5f46c7, #8b92f3);
+    color: #fff;
+    padding: 16px 32px;
+    border: none;
+    border-radius: 999px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-card button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 42px rgba(31, 45, 82, 0.18);
+}
+
+.section-animate,
+.card,
+.hero-text,
+.hero-visual,
+.contact-card,
+.form-card {
+    opacity: 0;
+    transform: translateY(24px);
+    animation: fadeUp 0.8s ease forwards;
+}
+
+.hero-text { animation-delay: 0.15s; }
+.hero-visual { animation-delay: 0.25s; }
+.card { animation-delay: 0.2s; }
+.contact-card { animation-delay: 0.15s; }
+.form-card { animation-delay: 0.25s; }
+
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+footer {
+    background: #1f2647;
+    color: #d7dbff;
+    text-align: center;
+    padding: 24px 5%;
+}
+
+@media (max-width: 900px) {
+    .hero,
+    .contact-grid,
+    .practice {
+        grid-template-columns: 1fr;
+    }
+
+    nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 18px;
+    }
+}
+
+@media (max-width: 620px) {
+    .hero {
+        padding-top: 50px;
+    }
+
+    .hero h1 {
+        font-size: 2.6rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="container">
+        <nav>
+            <h2>EduAI</h2>
+            <ul>
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#courses">Courses</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<section id="home" class="hero container">
+    <div class="hero-text section-animate">
+        <h1>Learn Smarter with AI</h1>
+        <p>EduAI brings adaptive lessons, instant feedback, and a friendly learning experience for every student.</p>
+        <button class="btn">Get Started</button>
+    </div>
+    <div class="hero-visual section-animate">
+        <svg viewBox="0 0 720 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="40" y="60" width="640" height="360" rx="32" fill="url(#paint0_linear)" opacity="0.95"/>
+            <circle cx="180" cy="180" r="72" fill="#fff" opacity="0.18"/>
+            <circle cx="540" cy="130" r="68" fill="#ffdd7d" opacity="0.22"/>
+            <path d="M180 280C220 260 260 250 300 260C340 270 380 310 420 300" stroke="#fff" stroke-width="18" stroke-linecap="round"/>
+            <path d="M240 130C320 120 410 145 500 180" stroke="#fff" stroke-width="14" stroke-linecap="round"/>
+            <path d="M320 340C360 320 420 310 470 330" stroke="#fff" stroke-width="14" stroke-linecap="round"/>
+            <circle cx="390" cy="220" r="32" fill="#fff"/>
+            <circle cx="275" cy="250" r="18" fill="#fff"/>
+            <defs>
+                <linearGradient id="paint0_linear" x1="40" y1="60" x2="680" y2="420" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#8b92f3"/>
+                    <stop offset="1" stop-color="#5f63e7"/>
+                </linearGradient>
+            </defs>
+        </svg>
+    </div>
+</section>
+
+<section id="features" class="features container">
+    <div class="card section-animate">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 360'%3E%3Crect width='640' height='360' rx='28' fill='%23667eea'/%3E%3Cpath d='M160 215c0-54 56-98 124-98s124 44 124 98' fill='none' stroke='%23fff' stroke-width='24' stroke-linecap='round'/%3E%3Cpath d='M160 260h248' stroke='%23fff' stroke-width='24' stroke-linecap='round'/%3E%3Cpath d='M430 124l82 50-82 50V124z' fill='%23fff'/%3E%3C/svg%3E" alt="AI Tutor illustration">
+        <h3>AI Tutor</h3>
+        <p>Personalized recommendations, guided study plans, and instant help whenever you need it.</p>
+    </div>
+
+    <div class="card section-animate">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 360'%3E%3Crect width='640' height='360' rx='28' fill='%2384c7f9'/%3E%3Cpath d='M140 110h360v180H140z' fill='%23fff' opacity='0.18'/%3E%3Cpath d='M180 150h280' stroke='%23fff' stroke-width='28' stroke-linecap='round'/%3E%3Cpath d='M180 210h220' stroke='%23fff' stroke-width='28' stroke-linecap='round'/%3E%3Cpath d='M260 270h120' stroke='%23fff' stroke-width='24' stroke-linecap='round'/%3E%3Ccircle cx='500' cy='230' r='42' fill='%23fff'/%3E%3C/svg%3E" alt="Interactive quizzes illustration">
+        <h3>Interactive Quizzes</h3>
+        <p>Practice with powerful question sets, quizzes, and instant AI feedback for every topic.</p>
+    </div>
+
+    <div class="card section-animate">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 360'%3E%3Crect width='640' height='360' rx='28' fill='%237f81ff'/%3E%3Cpath d='M170 120h300v160H170z' fill='%23fff' opacity='0.18'/%3E%3Cpath d='M220 170h220' stroke='%23fff' stroke-width='24' stroke-linecap='round'/%3E%3Cpath d='M220 220h160' stroke='%23fff' stroke-width='24' stroke-linecap='round'/%3E%3Cpath d='M220 270h100' stroke='%23fff' stroke-width='24' stroke-linecap='round'/%3E%3Ccircle cx='470' cy='180' r='30' fill='%23ffd369'/%3E%3Ccircle cx='470' cy='240' r='18' fill='%23ffd369'/%3E%3C/svg%3E" alt="Progress tracking illustration">
+        <h3>Progress Tracking</h3>
+        <p>Follow your growth with clear milestones, streaks, and skill achievement badges.</p>
+    </div>
+</section>
+
+<section id="courses" class="courses container">
+    <div class="card section-animate">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 360'%3E%3Crect width='640' height='360' rx='28' fill='%23d5e9ff'/%3E%3Cpath d='M160 230l120-80 120 80' fill='none' stroke='%231f2d52' stroke-width='18' stroke-linecap='round'/%3E%3Cpath d='M280 150v170' stroke='%231f2d52' stroke-width='18' stroke-linecap='round'/%3E%3Cpath d='M120 100h400' stroke='%231f2d52' stroke-width='20' stroke-linecap='round'/%3E%3Ccircle cx='520' cy='120' r='36' fill='%23ffb86c'/%3E%3C/svg%3E" alt="Data science course illustration">
+        <h3>Data Science 101</h3>
+        <p>Build a solid foundation in data analysis, visualization, and predictive modeling.</p>
+    </div>
+
+    <div class="card section-animate">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 360'%3E%3Crect width='640' height='360' rx='28' fill='%23ffe9dd'/%3E%3Cpath d='M160 140h320v140H160z' fill='%23fff' opacity='0.85'/%3E%3Cpath d='M220 180h220' stroke='%23924dff' stroke-width='20' stroke-linecap='round'/%3E%3Cpath d='M220 230h180' stroke='%23924dff' stroke-width='20' stroke-linecap='round'/%3E%3Cpath d='M220 280h140' stroke='%23924dff' stroke-width='20' stroke-linecap='round'/%3E%3Ccircle cx='500' cy='175' r='34' fill='%23924dff'/%3E%3C/svg%3E" alt="AI course illustration">
+        <h3>AI for Everyone</h3>
+        <p>Understand AI concepts, applications, and ethical design with easy step-by-step lessons.</p>
+    </div>
+
+    <div class="card section-animate">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 360'%3E%3Crect width='640' height='360' rx='28' fill='%23dbeff8'/%3E%3Cpath d='M160 190h320v90H160z' fill='%23fff' opacity='0.88'/%3E%3Cpath d='M220 230h200' stroke='%231f2d52' stroke-width='20' stroke-linecap='round'/%3E%3Cpath d='M220 270h120' stroke='%231f2d52' stroke-width='20' stroke-linecap='round'/%3E%3Ccircle cx='500' cy='160' r='42' fill='%2366c1f4'/%3E%3C/svg%3E" alt="Design course illustration">
+        <h3>Design Thinking</h3>
+        <p>Develop creativity, empathy, and prototyping skills for real-world problem solving.</p>
+    </div>
+
+    <div class="card section-animate">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 360'%3E%3Crect width='640' height='360' rx='28' fill='%23d8e6ff'/%3E%3Cpath d='M160 140h320v140H160z' fill='%23fff' opacity='0.88'/%3E%3Cpath d='M220 180h220' stroke='%231f2d52' stroke-width='20' stroke-linecap='round'/%3E%3Cpath d='M220 230h160' stroke='%231f2d52' stroke-width='20' stroke-linecap='round'/%3E%3Cpath d='M220 280h100' stroke='%231f2d52' stroke-width='20' stroke-linecap='round'/%3E%3Ccircle cx='500' cy='205' r='34' fill='%23a7c7ff'/%3E%3C/svg%3E" alt="Coding course illustration">
+        <h3>Coding Bootcamp</h3>
+        <p>Learn modern programming skills with practical projects and real coding challenges.</p>
+    </div>
+</section>
+
+<section class="practice container">
+    <div class="card section-animate">
+        <h3>Practice Labs</h3>
+        <p>Instant practice sessions, AI explanations, and skill drills that adapt to your progress.</p>
+    </div>
+    <div class="card section-animate">
+        <h3>Career Pathways</h3>
+        <p>Get course recommendations, portfolio help, and resume tips aligned with your goals.</p>
+    </div>
+    <div class="card section-animate">
+        <h3>Community Access</h3>
+        <p>Join live study groups, peer feedback channels, and mentor sessions.</p>
+    </div>
+</section>
+
+<section id="contact" class="testimonials container">
+    <div class="section-title">
+        <h2>Contact & Course Request</h2>
+        <p>Send us a message and we’ll help you choose the perfect course or answer your questions fast.</p>
+    </div>
+    <div class="contact-grid">
+        <div class="contact-card section-animate">
+            <h3>Need help?</h3>
+            <ul class="contact-list">
+                <li><span>📧</span> support@eduai.com</li>
+                <li><span>📞</span> +1 (888) 555-0124</li>
+                <li><span>🏢</span> 521 Learning Ave, San Francisco, CA</li>
+            </ul>
+        </div>
+        <div class="form-card section-animate">
+            <h3>Send a message</h3>
+            <form id="contactForm">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Your name" required>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Your email" required>
+
+                <label for="course">Course interest</label>
+                <input type="text" id="course" name="course" placeholder="Data Science, AI, Design..." required>
+
+                <label for="message">Message</label>
+                <textarea id="message" name="message" placeholder="Tell us what you need" required></textarea>
+
+                <button type="submit">Submit Request</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p>© 2026 EduAI. All Rights Reserved.</p>
+    </div>
+</footer>
+
+<script>
+const navLinks = document.querySelectorAll('nav a');
+const sections = document.querySelectorAll('section[id]');
+
+navLinks.forEach((link) => {
+    link.addEventListener('click', (event) => {
+        navLinks.forEach(item => item.classList.remove('active'));
+        event.target.classList.add('active');
+    });
+});
+
+window.addEventListener('scroll', () => {
+    let currentSection = 'home';
+    sections.forEach((section) => {
+        const sectionTop = section.offsetTop - 120;
+        if (window.scrollY >= sectionTop) {
+            currentSection = section.getAttribute('id');
+        }
+    });
+    navLinks.forEach((link) => {
+        link.classList.toggle('active', link.getAttribute('href') === '#' + currentSection);
+    });
+});
+
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+    contactForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        alert('Thanks for your request! We will contact you soon.');
+        contactForm.reset();
+    });
+}
+</script>
+
+</body>
+</html>
